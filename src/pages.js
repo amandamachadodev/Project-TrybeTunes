@@ -7,6 +7,7 @@ import Favorites from './favorites';
 import Profile from './profile';
 import ProfileEdit from './ProfileEdit';
 import NotFound from './NotFound';
+import Loading from './Loading';
 
 class Pages extends React.Component {
   render() {
@@ -18,6 +19,7 @@ class Pages extends React.Component {
         <Route path="/favorites" component={ Favorites } />
         <Route path="/profile" component={ Profile } />
         <Route path="/profile/edit" component={ ProfileEdit } />
+        <Route path="/Loading" component={ Loading } />
         <NotFound />
       </div>
     );
