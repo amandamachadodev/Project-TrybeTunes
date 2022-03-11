@@ -28,7 +28,7 @@ class Search extends React.Component {
           <label htmlFor="artist">
             <input
               type="text"
-              data-testid="link-to-profile"
+              data-testid="search-artist-input"
               onChange={ this.buttonAble }
               placeholder="Nome do artista"
             />
