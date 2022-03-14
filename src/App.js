@@ -26,7 +26,7 @@ class App extends React.Component {
           <Route
             exact
             path="/album/:id"
-            component={ Album }
+            render={ (props) => <Album { ...props } /> }
           />
           <Route
             exact

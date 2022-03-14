@@ -42,7 +42,6 @@ class Search extends React.Component {
     } else {
       this.setState({ loading: false });
     }
-    console.log(resultArtistSearch);
   }
 
   render() {
@@ -82,7 +81,7 @@ class Search extends React.Component {
                 {
                   (returnArtist.length === 0) ? <p>Nenhum álbum foi encontrado</p>
                     : returnArtist.map((element) => (
-                      <div key={ element.artitId }>
+                      <div key={ element.collectionId }>
                         <img src={ element.artworkUrl100 } alt={ element.artistName } />
                         <h3>{ element.artistName}</h3>
                         <p>{element.collectionId}</p>
