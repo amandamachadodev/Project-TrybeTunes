@@ -13,9 +13,6 @@ class MusicCard extends React.Component {
       nameAlbum: '',
       loading: false,
       favorites: [],
-      checkListFavorite: '',
-      newCheckListFavorite: [],
-      check: false,
     };
   }
 
@@ -40,7 +37,7 @@ class MusicCard extends React.Component {
   }
 
   checkFavoriteMusic = async () => {
-    this.setState({ loading: true});
+    this.setState({ loading: true });
     const returnFavorite = await addSong();
     this.setState({ loading: false,
       favorites: returnFavorite });
@@ -50,11 +47,11 @@ class MusicCard extends React.Component {
     this.setState({ loading: true });
     const listFavorite = await getFavoriteSongs();
     console.log(listFavorite);
-    this.setState({ loading: false, newCheckListFavorite: listFavorite });
+    this.setState({ loading: false });
   }
 
   render() {
-    const { listAlbum, artistAlbum, newCheckListFavorite,
+    const { listAlbum, artistAlbum,
       nameAlbum, loading, favorites } = this.state;
     return (
       <>
