@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getMusics from '../services/musicsAPI';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from '../pages/Loading';
 
 class MusicCard extends React.Component {
@@ -13,11 +13,16 @@ class MusicCard extends React.Component {
       nameAlbum: '',
       loading: false,
       favorites: [],
+      checkListFavorite: '',
+      newCheckListFavorite: [],
+      check: false,
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.musicAlbum();
+    this.musicasFavoritas();
+    await getFavoriteSongs();
   }
 
   musicAlbum = async () => {
@@ -34,22 +39,31 @@ class MusicCard extends React.Component {
     }
   }
 
-  favoriteMusic = async () => {
-    this.setState({ loading: true });
+  checkFavoriteMusic = async () => {
+    this.setState({ loading: true});
     const returnFavorite = await addSong();
-    this.setState({ favorites: returnFavorite, loading: false });
+    this.setState({ loading: false,
+      favorites: returnFavorite });
+  }
+
+  musicasFavoritas = async () => {
+    this.setState({ loading: true });
+    const listFavorite = await getFavoriteSongs();
+    console.log(listFavorite);
+    this.setState({ loading: false, newCheckListFavorite: listFavorite });
   }
 
   render() {
-    const { listAlbum, artistAlbum, nameAlbum, loading, favorites } = this.state;
+    const { listAlbum, artistAlbum, newCheckListFavorite,
+      nameAlbum, loading, favorites } = this.state;
     return (
       <>
         <p data-testid="artist-name">{ artistAlbum }</p>
         <p data-testid="album-name">{ nameAlbum }</p>
-        {loading ? <Loading /> : favorites}
+        {loading ? <Loading /> : ''}
         {
           listAlbum.map((element) => (
-            element.previewUrl === undefined ? ''
+            element.previewUrl === undefined ? favorites
               : (
                 <div key={ element.trackId }>
                   <p>{element.trackName}</p>
@@ -65,7 +79,8 @@ class MusicCard extends React.Component {
                     <input
                       type="checkbox"
                       data-testid={ `checkbox-music-${element.trackId}` }
-                      onChange={ this.favoriteMusic }
+                      onChange={ this.checkFavoriteMusic }
+                      name={ element.trackId }
                     />
                   </label>
                 </div>)))
@@ -75,10 +90,8 @@ class MusicCard extends React.Component {
   }
 }
 
-MusicCard.propType = {
+MusicCard.propTypes = {
   id: PropTypes.string.isRequired,
-  valueInputArtist: PropTypes.string.isRequired,
-  artistAlbum: PropTypes.string.isRequired,
 };
 
 export default MusicCard;

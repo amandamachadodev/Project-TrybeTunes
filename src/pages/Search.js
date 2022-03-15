@@ -16,10 +16,6 @@ class Search extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.searchArtist();
-  }
-
   buttonAble = (event) => {
     const artistInput = event.target.value;
     this.setState({ valueInputArtist: artistInput });
@@ -72,11 +68,10 @@ class Search extends React.Component {
                 </button>
               </form>
               { button
-                ? (
-                  <div>
-                    <p>{`Resultado de álbuns de: ${valueInputArtist}`}</p>
-                  </div>)
-                : ''}
+              && (
+                <div>
+                  <p>{`Resultado de álbuns de: ${valueInputArtist}`}</p>
+                </div>)}
               <div>
                 {
                   (returnArtist.length === 0) ? <p>Nenhum álbum foi encontrado</p>

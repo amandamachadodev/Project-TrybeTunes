@@ -5,20 +5,21 @@ import MusicCard from '../component/MusicCard';
 
 class Album extends React.Component {
   render() {
-    const { id } = this.props.match.params;
-    const { valueInputArtist } = this.props;
+    console.log(this.props);
+    const { match: { params: { id } } } = this.props;
     return (
       <div data-testid="page-album">
         <Header />
-        <MusicCard id={ id } valueInputArtist={ valueInputArtist } />
+        <MusicCard id={ id } />
       </div>
     );
   }
 }
 
 Album.propTypes = {
-  id: PropTypes.string.isRequired,
-  valueInputArtist: PropTypes.string.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.string,
+  }).isRequired,
 };
 
 export default Album;

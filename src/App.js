@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
-import Search from './pages/search';
-import Album from './pages/album';
-import Favorites from './pages/favorites';
-import Profile from './pages/profile';
+import Search from './pages/Search';
+import Album from './pages/Album';
+import Favorites from './pages/Favorites';
+import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
 
@@ -26,7 +26,7 @@ class App extends React.Component {
           <Route
             exact
             path="/album/:id"
-            render={ (props) => <Album { ...props } /> }
+            component={ Album }
           />
           <Route
             exact
@@ -43,7 +43,11 @@ class App extends React.Component {
             path="/profile/edit"
             component={ ProfileEdit }
           />
-          <NotFound />
+          <Route
+            exact
+            path="*"
+            component={ NotFound }
+          />
 
         </Switch>
       </BrowserRouter>
